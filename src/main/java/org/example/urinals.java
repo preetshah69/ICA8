@@ -30,8 +30,30 @@ public class urinals {
         return 0;
     }
 
-    public void openFile(String path){
+    public void openFile(String path) {
+        throws IOException {
+            try {
+                urinals alpha = new urinals();
+                File fe = new File(path);
+                while (fe == null) {
+                    throw new IOException();
+                }
+                File closefl = new File("src/data");
+                while (closefl == null) {
+                    throw new IOException();
+                }
+                Scanner c = new Scanner(closefl);
+                int data = Integer.parseInt(c.nextLine());
 
+                String openFl = "src/main/rule.txt";
+                if (data != 0)
+                    openFl = "src/main/rule" + data + ".txt";
+            } catch (IOException e) {
+                System.out.println("error");
+                e.printStackTrace();
+            }
+
+        }
     }
 
     private void writeToFile(String openFl, int free) {
@@ -42,6 +64,7 @@ public class urinals {
         Scanner ip = new Scanner(System.in);
         System.out.println("Choose Input:");
         System.out.println("Enter 1 for Keyboard");
+        System.out.println("Enter 2 to input values from file");
         int input = ip.nextInt();
         switch (input) {
             case 1:
@@ -51,6 +74,12 @@ public class urinals {
                 urinals ur=new urinals();
                 System.out.println(ur.goodString(a));
                 break;
+            case 2:
+                urinals ur1=new urinals();
+                System.out.println(ur1.openFile("C:/Users/Preet/IdeaProjects/ICA8_final/Data/urinal.dat"));
+                break;
+            default:
+                System.out.println("Not good Choice");
         }
 
     }
