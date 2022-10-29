@@ -26,8 +26,41 @@ public class urinals {
         return isApproved;
     }
     public int countUrinals(String str) {
+        urinals alpha=new urinals();
+        boolean isApproved=alpha.goodString(str);
+        int x,f= 0;
+        String[] a=str.split("");
+        int len= a.length;
 
-        return 0;
+        int s[]= new int[len];
+
+        for (x=0;x<len;x++) {
+            s[x]=Integer.parseInt(String.valueOf(a[x]));
+        }
+        if(len==1) {
+            while(s[0]==0) {
+                f=1;
+                s[0]=1;
+                break;
+            }
+        } else {
+            x = 0;
+            while(s[x]==0 && s[x+1]==0) {
+                s[x]=1;
+                f++;
+                break;
+            }
+            for(x=1;x<len-1;x++) {
+                if (s[x-1]==0 && s[x]==0 && s[x+1]==0) {
+                    s[x]=1; f++;
+                }
+            }
+            if(s[x-1]==0 && s[x]==0) {
+                s[x]=1; f++;
+            }
+        }
+        return f;
+
     }
 
     public void openFile(String path) {
@@ -48,6 +81,22 @@ public class urinals {
                 String openFl = "src/main/rule.txt";
                 if (data != 0)
                     openFl = "src/main/rule" + data + ".txt";
+                Scanner scan = new Scanner(fe);
+                while (scan.hasNextLine()) {
+                    String str = scan.nextLine();
+                    if (str.equals("-1"))
+                        break;
+                    int free = alpha.countUrinals(str);
+                    alpha.writeToFile(openFl, free);
+                }
+                FileWriter cw = new FileWriter("src/total");
+                while (cw == null) {
+                    throw new IOException();
+                }
+                cw.write(Integer.toString(data + 1));
+                cw.close();
+
+                System.out.println("Output noted in the file" + openFl);
             } catch (IOException e) {
                 System.out.println("error");
                 e.printStackTrace();
