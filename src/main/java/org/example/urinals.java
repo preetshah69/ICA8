@@ -107,6 +107,25 @@ public class urinals {
 
     private void writeToFile(String openFl, int free) {
 
+        try {
+            FileWriter w=new FileWriter(openFl, true);
+            while(w==null) {
+                throw new IOException();
+            }
+            BufferedWriter bw=new BufferedWriter(w);
+            while(bw==null) {
+                throw new IOException();
+            }
+            bw.write(Integer.toString(free));
+            bw.newLine();
+            bw.close();
+        }
+        catch(IOException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
+
+
     }
 
     public static void main(String[] args) {
