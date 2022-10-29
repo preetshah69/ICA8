@@ -10,12 +10,23 @@ import java.util.Scanner;
 
 public class urinals {
     boolean goodString(String str) {
-        System.out.println ("Not yet implemented");
-        return true;
+        String[] a=str.split("");
+        boolean isApproved=true;
+        int len = a.length;
+        for (int x = 0; x < a.length-1; x++)
+        {
+            int y=Integer.parseInt(String.valueOf(a[x]));
+            int z=Integer.parseInt(String.valueOf(a[x+1]));
+            if (y==1 && z==1)
+            {
+                isApproved = false;
+                break;
+            }
+        }
+        return isApproved;
     }
     public int countUrinals(String str) {
 
-        System.out.println ("count urinals func, Not yet implemented");
         return 0;
     }
 
@@ -23,11 +34,24 @@ public class urinals {
 
     }
 
-    private void outputToFile(String opfl, int free) {
+    private void writeToFile(String openFl, int free) {
 
     }
 
     public static void main(String[] args) {
+        Scanner ip = new Scanner(System.in);
+        System.out.println("Choose Input:");
+        System.out.println("Enter 1 for Keyboard");
+        int input = ip.nextInt();
+        switch (input) {
+            case 1:
+                Scanner str = new Scanner(System.in);
+                System.out.println("Enter any Binary digit string:");
+                String a=str.next();
+                urinals ur=new urinals();
+                System.out.println(ur.goodString(a));
+                break;
+        }
 
     }
 
